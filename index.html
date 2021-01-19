@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Todoリスト</h1>
+      <div>
+        <h4>新規タスク</h4>
+        <form @submit.prevent="addTask">
+          <input type="text" ref="task">
+          <button type="submit">追加</button>
+        </form>
+      </div>
+    </header>
+    <hr>
+    <section class="main">
+      <h3>タスク</h3>
+      <table>
+        <thead>
+          <tr>
+            <th class="checkBox">-</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="todo in todos" :key="todo.id">
+            <td><input type="checkbox" v-model="todo.completed" class="checkBox"></td>
+            <td><span v-bind:class="{complete: todo.completed}">{{ todo.task }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <p class="footer">完了したタスクを<span><button @click="removeTask(todo)">削除</button></span></p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
